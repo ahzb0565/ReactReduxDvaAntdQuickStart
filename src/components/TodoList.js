@@ -3,7 +3,7 @@ import Todo from './Todo'
 
 const TodoList = props => {
   const todoList = props.todos.map((item, index) => (
-    <Todo key={ index } todo={ item.text } />
+    <Todo key={ index } todo={ item.text } onDelete={ () => props.onDelete(index)}/>
   ))
   return (
     <div>
@@ -22,5 +22,5 @@ const todos = [
   {text: 'task 1', completed: false},
   {text: 'task 2', completed: false},
 ]
-<TodoList todos={ todos } />
+<TodoList todos={ todos } onDelete={ this.deleteItem.bind(this) }/>
 */
