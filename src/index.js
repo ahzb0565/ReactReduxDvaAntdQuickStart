@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const Hello = props => (
-  <div>Hello React</div>
-)
+import TodoApp from './TodoApp'
 
-ReactDOM.render(<Hello />, document.getElementById('root'))
+ReactDOM.render(<TodoApp />, document.getElementById('root'))
