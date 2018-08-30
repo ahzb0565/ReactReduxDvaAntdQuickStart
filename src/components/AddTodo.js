@@ -1,27 +1,22 @@
 import React from 'react'
+import { Input, Button, Icon} from 'antd'
 
-class AddTodo extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = {value: ''}
-  }
-  handleChange(e){
-    if(!!e.target.value.trim()){
-      this.setState({value: e.target.value})
-    }
-  }
-  handleClick(){
-    this.props.onAdd(this.state.value)
-    this.setState({value: ''})
-  }
-  render(){
-    return (
-      <div>
-        <input type="text" value={this.state.value} onChange={ e => this.handleChange(e) } />
-        <button onClick={ this.handleClick.bind(this)}>Add</button>
-      </div>
-    )
-  }
+const AddTodo = props => {
+  return (
+    <div>
+      <Input 
+        type="text"
+        placeholder="Add todo"
+        addonAfter={ <Icon type="plus" /> }
+        onPressEnter={ (e) => {
+          if (!!e.target.value.trim()){
+            props.onAdd(e.target.value)
+            e.target.value = ''
+          }
+        }}
+      />
+    </div>
+  )
 }
 
 export default AddTodo

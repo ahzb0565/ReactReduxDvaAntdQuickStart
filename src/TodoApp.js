@@ -1,6 +1,9 @@
 import React from 'react'
 import TodoList from './components/TodoList'
 import AddTodo from './components/AddTodo'
+import { Layout, Breadcrumb } from 'antd'
+
+const { Header, Content, Footer } = Layout;
 
 class TodoApp extends React.Component {
   constructor(props){
@@ -8,7 +11,7 @@ class TodoApp extends React.Component {
     this.state = {
       todos: [
         {text: 'task 1', completed: false},
-        {text: 'task 2', completed: false},
+        {text: 'task 2', completed: true},
       ]
     }
   }
@@ -30,10 +33,24 @@ class TodoApp extends React.Component {
   }
   render(){
     return (
-      <div>
-        <AddTodo onAdd={ value => this.handleAdd(value)}/>
-        <TodoList todos={ this.state.todos } onDelete={ this.deleteTodo.bind(this) } />
-      </div>
+      <Layout className="layout">
+        <Header>
+          <div className="logo" > Hello React </div>
+        </Header>
+        <Content style={{ padding: '0 50px' }}>
+          <Breadcrumb style={{ margin: '16px 0' }}>
+            <Breadcrumb.Item>Todo App</Breadcrumb.Item>
+          </Breadcrumb>
+          <TodoList
+            todos={ this.state.todos }
+            onDelete={ this.deleteTodo.bind(this) }
+            onAdd={value => this.handleAdd(value)}
+          />
+        </Content>
+        <Footer style={{ textAlign: 'center' }}>
+          Ant Design ©2018 Created by Ant UED
+        </Footer>
+      </Layout>
     )
   }
 }
