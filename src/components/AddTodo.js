@@ -1,7 +1,8 @@
 import React from 'react'
-import { Input, Button, Icon} from 'antd'
+import { Input, Icon} from 'antd'
+import PropTypes from 'prop-types'
 
-const AddTodo = props => {
+const AddTodo = ({ onAdd }) => {
   return (
     <div>
       <Input 
@@ -10,13 +11,17 @@ const AddTodo = props => {
         addonAfter={ <Icon type="plus" /> }
         onPressEnter={ (e) => {
           if (!!e.target.value.trim()){
-            props.onAdd(e.target.value)
+            onAdd(e.target.value)
             e.target.value = ''
           }
         }}
       />
     </div>
   )
+}
+
+AddTodo.propTypes = {
+  onAdd: PropTypes.func.isRequired
 }
 
 export default AddTodo

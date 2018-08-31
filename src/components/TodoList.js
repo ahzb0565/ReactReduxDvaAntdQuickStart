@@ -1,17 +1,17 @@
 import React from 'react'
-import { List, Button, Layout, Row, Col, Icon } from 'antd'
+import { List, Button, Layout, Row, Col } from 'antd'
+import PropTypes from 'prop-types'
 import AddTodo from './AddTodo'
 const { Content } = Layout
 
-const TodoList = props => {
-  const todos = props.todos.map((item, index) => ({ index, text: item.text, completed: item.completed }))
+const TodoList = ({ todos, onAdd, onDelete}) => {
   const Header = (
     <Row type="flex" justify="space-between" align="middle">
       <Col span={6}>
         My Todo List
       </Col>
       <Col span={18}>
-        <AddTodo onAdd={ value => props.onAdd(value)} />
+        <AddTodo onAdd={ value => onAdd(value)} />
       </Col>
     </Row>
   )
@@ -25,8 +25,8 @@ const TodoList = props => {
             bordered
             dataSource={ todos }
             renderItem={item => (
-              <List.Item actions={[<Button size="small" type="danger" onClick={() => props.onDelete(item.index)}>Delete</Button>]}>
-                <List.Item.Meta description={`${item.index + 1}. ${item.text}`} />
+              <List.Item actions={[<Button size="small" type="danger" onClick={() => onDelete(item.id)}>Delete</Button>]}>
+                <List.Item.Meta description={`${item.id + 1}. ${item.text}`} />
                 <div>{ item.completed? '已完成':'未完成'}</div>
               </List.Item>
             )}
@@ -35,6 +35,17 @@ const TodoList = props => {
       </Row>
     </Content>
   )
+}
+
+TodoList.propTypes = {
+  todos: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      completed: PropTypes.bool.isRequired
+    }).isRequired
+  ).isRequired,
+  onAdd: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired
 }
 
 export default TodoList

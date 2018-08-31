@@ -1,7 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux'
 
 import TodoApp from './TodoApp'
 import 'antd/dist/antd.css';
 
-ReactDOM.render(<TodoApp />, document.getElementById('root'))
+import { createStore } from 'redux'
+import { todoAppReducers } from './reducers'
+
+
+let store = createStore(todoAppReducers)
+
+
+ReactDOM.render(
+  <Provider store={store}>
+    <TodoApp />
+  </Provider>,
+  document.getElementById('root')
+)
